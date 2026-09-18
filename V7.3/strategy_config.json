@@ -1,0 +1,15 @@
+{
+  "mode":"DEMO",
+  "branding":"Created By DEXORZO Innovations",
+  "symbols":["EURUSD","GBPUSD","USDJPY","USDCHF","XAUUSD"],
+  "enabled_strategies":{
+    "EURUSD":["Mean Reversion","RSI Reversal","VWAP Mean Reversion"],
+    "GBPUSD":["Mean Reversion","Stochastic Reversal","Multi-Timeframe"],
+    "USDJPY":["Mean Reversion","RSI Reversal","EMA Pullback"],
+    "USDCHF":["Mean Reversion","VWAP Mean Reversion","Stochastic Reversal"],
+    "XAUUSD":["Mean Reversion","ATR Breakout","Volatility Expansion"]
+  },
+  "risk":{"risk_per_trade_pct":0.25,"max_daily_loss_pct":2.0,"max_open_positions":3,"max_symbol_positions":1,"max_total_exposure_pct":1.0},
+  "execution":{"slippage_points":2,"deviation_points":2,"max_spread_points":{"EURUSD":25,"GBPUSD":30,"USDJPY":30,"USDCHF":30,"XAUUSD":80},"atr_sl_multiplier":1.5,"risk_reward":1.8},
+  "filters":{"require_signal_consensus":2,"cooldown_minutes":30}
+}
