@@ -4,84 +4,144 @@ Python-based MetaTrader 5 automated trading research and execution project.
 
 ## Current status
 
-- V7.1: Demo-only execution with the spread-limit bug fixed.
-- The bot connects to MetaQuotes-Demo and is designed to reject non-demo servers.
-- Historical backtesting, robustness testing, paper trading, and demo execution are documented as separate stages.
+**Latest documented version: V7.1 — DEMO ONLY.**
+
+The repository preserves the project's evolution from the initial V1 bot through V7.1, including research, backtesting, robustness testing, paper trading, and controlled MetaQuotes-Demo execution.
+
+> Trading systems can lose money. Historical, paper, and demo results do not guarantee future performance.
 
 ## Version history
 
 | Version | Stage | Main additions |
 |---|---|---|
-| V2 | Research | 6-strategy backtesting |
-| V3 | Research | Train/test validation |
-| V4 | Research | Expanded to 12 strategies |
-| V5 | Research | Robustness, cost-stress and walk-forward testing |
-| V5.1 | Research | Faster/fixed robustness engine |
-| V6 | Paper | Paper/demo architecture and risk framework |
-| V6.1 | Paper | Monitoring dashboard and signal monitoring |
-| V6.2 | Paper | Simulated positions, ATR SL/TP and paper P/L |
-| V7 | Demo | MT5 Demo order execution, risk sizing, SL/TP and order validation |
-| V7.1 | Demo | Fixed per-symbol spread configuration and hardened demo execution |
+| V1 | Initial | EMA/RSI/breakout strategy, ATR SL/TP, risk controls, MT5 connection |
+| V2 | Research | Six independent strategies, ensemble signals, historical backtesting |
+| V3 | Research | Train/test validation and optimized precomputed signal/backtest engine |
+| V4 | Research | Expanded research engine to 12 strategies |
+| V5 | Research | Parameter robustness, cost-stress testing and walk-forward analysis |
+| V5.1 | Research | Faster/fixed robustness workflow |
+| V6 | Paper/Demo architecture | Real-time signal engine, risk manager, PAPER/DEMO separation |
+| V6.1 | Paper | Live monitoring dashboard and signal-state tracking |
+| V6.2 | Paper | Simulated positions, ATR SL/TP, P/L, win rate, drawdown and trade journal |
+| V7 | Demo | MT5 Demo order execution, risk sizing, spread/stop checks and order validation |
+| V7.1 | Demo | Fixed per-symbol spread configuration and MetaQuotes-Demo safety lock |
 
-## Strategies
+## Repository layout
 
-The project has evolved to a multi-strategy signal engine. Strategies explored across versions include mean-reversion, stochastic reversal and additional trend/momentum/volatility style signals.
+```text
+V1/       Initial MT5 Python bot
+V2/       Six-strategy research
+V3/       Train/test robust backtesting
+V4/       Twelve-strategy research
+V5/       Robustness + walk-forward research
+V6/       Paper/demo architecture
+V6.1/     Paper monitoring
+V6.2/     Paper execution simulator
+V7.1/     Current Demo execution build
 
-## Research results
+docs/
+  ARCHITECTURE.md
+  MT5_SETUP.md
+  RISK_MANAGEMENT.md
+  TROUBLESHOOTING.md
+  VERSION_HISTORY.md
+```
 
-Selected historical test observations from the development process:
+## Strategy research
 
-- V3/V4 mean-reversion tests were positive on the aggregate research sample, while results varied by symbol.
-- V5 cost-stress testing showed degraded but still positive aggregate mean-reversion research results at the tested cost multipliers.
-- Walk-forward results varied substantially by symbol.
+The project progressed from a single trend/breakout strategy into a multi-strategy framework. Researched signals include trend following, breakouts, mean reversion, momentum, volatility expansion, multi-timeframe context and later reversal/VWAP/ATR-style variants.
 
-These are historical research observations, not guarantees of future performance.
+The research process deliberately separates historical testing, paper simulation and Demo execution.
 
-## V7.1 features
+## V5 research observations
+
+During development, mean reversion was one of the strongest aggregate research candidates in the tested samples, but results varied by instrument. Cost-stress and walk-forward testing also showed that performance and stability varied with transaction costs and symbol.
+
+These are historical observations from the development dataset and should not be treated as forecasts.
+
+## V6 paper progression
+
+### V6
+Real-time market data + signal engine + risk framework, with PAPER mode sending zero orders.
+
+### V6.1
+Added a live console monitor showing scan status, signals and per-symbol state.
+
+### V6.2
+Added simulated positions with ATR-based SL/TP, live tick monitoring, paper P/L, wins/losses, win rate, drawdown and CSV trade records.
+
+## V7.1 Demo execution
+
+V7.1 can submit actual orders to the connected **MetaQuotes-Demo** account after execution checks.
+
+Key controls include:
 
 - M15 closed-candle signal processing
 - Multi-strategy confirmation
-- ATR-based stop loss and take profit
-- Risk-based position sizing
+- ATR-based SL/TP
+- Risk-based volume calculation using MT5 profit estimation
 - Per-symbol spread limits
-- Broker stop-distance validation
+- Broker minimum stop-distance checks
 - `mt5.order_check()` before `mt5.order_send()`
-- Demo-only server safety lock
-- Account/terminal trade-permission checks
+- MetaQuotes-Demo-only safety guard
+- Account and terminal trade-permission checks
 - One bot position per symbol
-- Live floating and realized P/L tracking
-- Win/loss tracking
-- CSV trade journal
-- Ctrl+C graceful shutdown
+- Demo trade CSV journal
 
-## Safety
+### V7.1 bug fix
 
-V7/V7.1 are intended for MetaQuotes-Demo execution only. The bot is not a statement that a strategy is profitable or suitable for live capital. Live trading should require separate validation, monitoring, controls, and broker-specific testing.
+V7.0 attempted to convert the entire per-symbol spread-limit dictionary to a float. That produced:
 
-## Windows setup
+```text
+TypeError: float() argument must be a string or a real number, not 'dict'
+```
 
-1. Install Python.
-2. Install and log in to MetaTrader 5.
-3. Confirm the terminal is connected to the intended demo account.
-4. Install requirements:
+V7.1 resolves the configured spread limit for the individual symbol.
+
+## Setup
+
+1. Install MetaTrader 5 desktop.
+2. Log in to a demo account.
+3. Install Python dependencies.
+4. Confirm MT5 is connected and automated trading is allowed.
+5. Review the relevant version directory.
+6. For V7.1, run its Demo launcher only after confirming the server is MetaQuotes-Demo.
+
+Example:
 
 ```bash
 python -m pip install -r requirements.txt
 ```
 
-5. Start the demo bot:
+## Security
 
-```text
-run_v7_demo.bat
-```
+Never commit:
 
-## Configuration
+- MT5 passwords
+- API keys
+- private tokens
+- account secrets
+- generated trading logs containing sensitive information
 
-Strategy and execution settings are stored in `strategy_config.json`. Keep credentials out of source control. Do not commit API keys, passwords or private account secrets.
+The repository's `.gitignore` excludes common credential and generated-report files.
 
-## Project roadmap
+## Development roadmap
 
-Future versions can add stronger portfolio-level risk limits, daily loss protection, drawdown monitoring, trade lifecycle analytics, persistence/recovery, additional validation, and a production-readiness review.
+Potential future work:
+
+- stronger portfolio-level risk limits
+- daily loss enforcement in the live execution loop
+- persistent state and restart recovery
+- current/session drawdown analytics
+- R-multiple and trade-age dashboard
+- broker filling-mode compatibility improvements
+- richer execution journal
+- additional validation and stress testing
+- production-readiness review
+
+## Disclaimer
+
+This is a software/research project, not financial advice. Automated trading involves substantial risk. No strategy or version in this repository guarantees profits.
 
 ---
-Built during iterative MT5 AutoTrader research and development.
+**MT5 AutoTrader — V1 → V7.1**
