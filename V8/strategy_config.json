@@ -1,0 +1,86 @@
+{
+  "mode": "DEMO",
+  "branding": "Created By DEXORZO Innovations",
+  "symbols": [
+    "EURUSD",
+    "GBPUSD",
+    "USDJPY",
+    "USDCHF",
+    "XAUUSD",
+    "USDCAD"
+  ],
+  "enabled_strategies": {
+    "EURUSD": [
+      "Mean Reversion",
+      "RSI Reversal",
+      "VWAP Mean Reversion"
+    ],
+    "GBPUSD": [
+      "Mean Reversion",
+      "Stochastic Reversal",
+      "Multi-Timeframe"
+    ],
+    "USDJPY": [
+      "Mean Reversion",
+      "RSI Reversal",
+      "EMA Pullback"
+    ],
+    "USDCHF": [
+      "Mean Reversion",
+      "VWAP Mean Reversion",
+      "Stochastic Reversal"
+    ],
+    "XAUUSD": [
+      "Mean Reversion",
+      "ATR Breakout",
+      "Volatility Expansion"
+    ],
+    "USDCAD": [
+      "Mean Reversion",
+      "EMA Pullback",
+      "Trend Momentum"
+    ]
+  },
+  "risk": {
+    "risk_per_trade_pct": 0.25,
+    "max_daily_loss_pct": 2,
+    "max_open_positions": 3,
+    "max_symbol_positions": 1,
+    "max_total_exposure_pct": 1
+  },
+  "execution": {
+    "deviation_points": 2,
+    "max_spread_points": {
+      "EURUSD": 25,
+      "GBPUSD": 30,
+      "USDJPY": 30,
+      "USDCHF": 30,
+      "XAUUSD": 80,
+      "USDCAD": 30
+    },
+    "atr_sl_multiplier": 1.5,
+    "risk_reward": 1.8
+  },
+  "filters": {
+    "require_signal_consensus": 2,
+    "cooldown_minutes": 30
+  },
+  "management": {
+    "break_even": {
+      "enabled": true,
+      "trigger_r": 1,
+      "offset_points": 2
+    },
+    "atr_trailing": {
+      "enabled": true,
+      "trigger_r": 1.5,
+      "atr_multiplier": 1
+    },
+    "partial_take_profit": {
+      "enabled": false,
+      "trigger_r": 1,
+      "close_fraction": 0.5
+    },
+    "max_time_in_trade_minutes": 240
+  }
+}
