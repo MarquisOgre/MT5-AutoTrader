@@ -1,0 +1,16 @@
+{
+  "version":"8.9",
+  "timeframe":"M5",
+  "selection":"LIVE_MARKET_DISCOVERY_DYNAMIC_TOP_12",
+  "weekend_mode":"CRYPTO_THEN_METALS_THEN_INDEX",
+  "weekday_mode":"FX_THEN_CRYPTO_THEN_METALS_THEN_INDEX",
+  "live_quote_source":"SYMBOL_INFO_THEN_TICK",
+  "live_quote_age_seconds":{"FX":180,"CRYPTO":120,"METALS":300,"INDEX":300,"OTHER":300},
+  "max_markets":12,
+  "risk_pct":0.25,
+  "max_daily_loss_pct":2.0,
+  "max_open_positions":3,
+  "max_total_exposure_pct":1.0,
+  "strategies":12,
+  "demo_only":true
+}
