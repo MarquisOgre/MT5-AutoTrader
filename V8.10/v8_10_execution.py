@@ -665,7 +665,7 @@ def dashboard(a,selected,states,last,error,reasons=None,scanned=0,inventory=None
     ps=positions(); peak=update_peak(float(a.equity)); dd=max(0,(peak-a.equity)/peak*100) if peak else 0
     os.system("cls")
     print("+"+"-"*80+"+")
-    print("|"+"DEXORZO  V8.9  |  INTELLIGENT 24x7 DYNAMIC M5".center(80)+"|")
+    print("|"+"DEXORZO  V8.10  |  RESILIENT LIVE FEED M5".center(80)+"|")
     print("|"+BRAND.center(80)+"|")
     print("+"+"-"*80+"+")
     print("|"+f"Server: {a.server}".ljust(40)+f"Balance: ${a.balance:,.2f}".ljust(40)+"|")
@@ -818,7 +818,6 @@ def main():
                         except Exception as e:
                             states[s]="ERROR"; error=f"{s}: {e}"
                 dashboard(a,selected,states,last,error,reasons,len(discovered),inventory,samples,diagnostics)
-                connected_notice=False
                 time.sleep(SCAN_SECONDS)
             except KeyboardInterrupt:
                 raise
