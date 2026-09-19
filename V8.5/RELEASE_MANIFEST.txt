@@ -1,0 +1,17 @@
+V8.5 Release Manifest
+
+Release: V8.5 Intelligent 24x7 Dynamic M5
+Local release ZIP: MT5_AutoTrader_V8_5_INTELLIGENT_24x7_M5.zip
+SHA-256: b60a34c7495f871f5b420bbc5df92642fc2d0017ee4bddfb587fe1c4f752788a
+
+Included release files:
+- v8_5_execution.py
+- strategy_config.json
+- requirements.txt
+- run_v8_5_intelligent_24x7_m5.bat
+- README.md
+- V8_5_ROADMAP.md
+
+The V8.5 engine discovers broker symbols, classifies FX/Crypto/Metals/Indices,
+uses fresh tick history fallback, ranks market quality, selects up to 12,
+and evaluates 12 strategies on closed M5 candles.
