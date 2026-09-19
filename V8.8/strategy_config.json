@@ -1,0 +1,15 @@
+{
+  "version": "8.8",
+  "timeframe": "M5",
+  "selection": "FAST_SESSION_AWARE_DYNAMIC_TOP_12",
+  "weekend_mode": "CRYPTO_THEN_METALS_THEN_INDEX",
+  "weekday_mode": "FX_THEN_CRYPTO_THEN_METALS_THEN_INDEX",
+  "fast_scan": true,
+  "max_markets": 12,
+  "risk_pct": 0.25,
+  "max_daily_loss_pct": 2.0,
+  "max_open_positions": 3,
+  "max_total_exposure_pct": 1.0,
+  "strategies": 12,
+  "demo_only": true
+}
