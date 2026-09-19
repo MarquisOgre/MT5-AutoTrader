@@ -1,5 +1,5 @@
 @echo off
-if /I not "%~1"== "MAX" (
+if /I not "%~1"=="MAX" (
   start "DEXORZO Innovations - MT5 AutoTrader V8.8" /MAX cmd /k ""%~f0" MAX"
   exit /b
 )
