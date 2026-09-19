@@ -1,0 +1,15 @@
+{
+  "timeframe": "M5",
+  "selection": "INTELLIGENT_24x7_DYNAMIC_TOP_12",
+  "asset_classes": ["FX","CRYPTO","METALS","INDEX"],
+  "fx_priority": "when_tradable",
+  "crypto_fallback": "when_fx_unavailable_or_insufficient",
+  "max_markets": 12,
+  "risk": {
+    "risk_per_trade_pct": 0.25,
+    "max_daily_loss_pct": 2.0,
+    "max_open_positions": 3,
+    "max_symbol_positions": 1,
+    "max_total_exposure_pct": 1.0
+  }
+}
